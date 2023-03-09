@@ -16,7 +16,6 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.productFormGroup=this.fb.group({
-      id:["",Validators.required],
       name:["",Validators.required],
       price:[0,Validators.required],
       quantity:[0,Validators.required],
@@ -28,9 +27,10 @@ export class ProductAddComponent implements OnInit {
   onSaveProduct(){
     this.submitted=true;
     if(this.productFormGroup?.invalid) return;
+    let v=confirm("Voulez-vous vraiment enregistrer ces donnees?");
+    if(v==true)
     this.productsService.saveProduct(this.productFormGroup?.value).subscribe(
-      data=>{alert("Sucess saving product");}
-    )
+      data=>{});
   }
 
 }

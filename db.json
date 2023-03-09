@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Computer",
-      "price": 4300,
+      "price": "400",
       "quantity": 600,
       "selected": true,
       "available": true
@@ -18,11 +18,11 @@
     },
     {
       "id": 3,
-      "name": "yann",
+      "name": "lan",
       "price": 9999,
       "quantity": 123,
       "selected": false,
-      "available": true
+      "available": false
     }
   ]
 }

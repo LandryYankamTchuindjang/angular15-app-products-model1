@@ -33,8 +33,11 @@ export class ProductEditComponent implements OnInit{
   }
 
   onUpdateProduct(){
+    this.submitted=true;
+    if(this.productFormGroup?.invalid) return;
+    let v=confirm("Voulez-vous vraiment mettre a jour?");
+    if(v==true)
     this.productsService.udapteProduct(this.productFormGroup?.value).subscribe(
-      data=>{alert("Success Product Updated");
-    });
+      data=>{});
   }
 }

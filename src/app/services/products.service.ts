@@ -44,6 +44,7 @@ export class ProductsService {
   }
 
   saveProduct(product:Product):Observable<Product>{
+    console.log("bonjour")
     let host=environment.host;
     return this.http.post<Product>(host+"/products",product);
   }
