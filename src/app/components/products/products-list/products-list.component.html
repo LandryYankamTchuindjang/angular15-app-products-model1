@@ -16,9 +16,7 @@
         </tr>
 
         <app-product-item
-        [product]="p"
-        (eventEmitter)="onActionEvent($event)"
-        *ngFor="let p of result.data" style="display:contents">
+        [product]="p" *ngFor="let p of result.data" style="display:contents">
         </app-product-item>
 
 
