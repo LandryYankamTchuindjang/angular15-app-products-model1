@@ -6,57 +6,43 @@ import { Product } from "../models/product.model";
 
 
 
+
 @Injectable({providedIn:"root"})
-export class ProductsService {
-  constructor(private http:HttpClient){}
+export class ProductService {
 
-  getAllProducts():Observable<Product[]>{
-    // let host=(Math.random()>0.2)?environment.host: environment.unreachableHost;
-    let host=environment.host;
+  constructor(private http:HttpClient) {
+  }
+
+  public getProducts():Observable<Product[]>{
+    let host=Math.random()>0.2?environment.host:environment.unreachableHost;
+    //let host=environment.host;
     return this.http.get<Product[]>(host+"/products");
+    //return throwError("Not Implemented yet");
+  }
+  public getSelectedProducts():Observable<Product[]>{
+    return this.http.get<Product[]>(environment.host+"/products?selected=true");
+  }
+  public getAvailableProducts():Observable<Product[]>{
+    return this.http.get<Product[]>(environment.host+"/products?available=true");
   }
 
-  getSelectedProducts():Observable<Product[]>{
-    let host=environment.host;
-    return this.http.get<Product[]>(host+"/products?selected=true");
+  public searchProducts(name:string):Observable<Product[]>{
+    return this.http.get<Product[]>(environment.host+"/products?name_like="+name);
   }
-
-  getAvailableProducts():Observable<Product[]>{
-    let host=environment.host;
-    return this.http.get<Product[]>(host+"/products?selected=true");
+  public setSelected(product:Product):Observable<Product>{
+    return this.http.put<Product>(environment.host+"/products/"+product.id,{...product,selected:!product.selected});
   }
-
-  searchProducts(keyword:string):Observable<Product[]>{
-    let host=environment.host;
-    return this.http.get<Product[]>(host+"/products?name_like="+keyword);
+  public delete(id:number):Observable<void>{
+     return this.http.delete<void>(environment.host+"/products/"+id);
   }
-
-  selectProducts(product:Product):Observable<Product>{
-    let host=environment.host;
-    product.selected=!product.selected;
-    return this.http.put<Product>(host+"/products/"+product.id,product);
+  public save(product:Product):Observable<Product>{
+    return this.http.post<Product>(environment.host+"/products/",product);
   }
-
-  deleteProducts(product:Product):Observable<void>{
-    let host=environment.host;
-    product.selected=!product.selected;
-    return this.http.delete<void>(host+"/products/"+product.id);
+  public update(product:Product):Observable<Product>{
+    return this.http.put<Product>(environment.host+"/products/"+product.id,product);
   }
-
-  saveProduct(product:Product):Observable<Product>{
-    let host=environment.host;
-    return this.http.post<Product>(host+"/products",product);
+  public getProductById(id:number):Observable<Product>{
+    return this.http.get<Product>(environment.host+"/products/"+id);
   }
-
-  getProduct(id:number):Observable<Product>{
-    let host=environment.host;
-    return this.http.get<Product>(host+"/products/"+id);
-  }
-
-  udapteProduct(product:Product):Observable<Product>{
-    let host=environment.host;
-    return this.http.put<Product>(host+"/products/"+product.id,product);
-  }
-
 
 }
