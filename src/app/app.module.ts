@@ -30,7 +30,7 @@ import { NewProductComponent } from './components/products/new-product/new-produ
     ProductsNavBarComponent,
     ProductsListComponent,
     ProductItemComponent,
-    NewProductComponent
+    NewProductComponent,
   ],
   imports: [
     BrowserModule,
